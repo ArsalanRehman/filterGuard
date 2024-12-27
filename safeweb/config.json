@@ -1,0 +1,5 @@
+{
+    "vpnProviders": ["vpnprovider1.com", "vpnprovider2.com"],
+    "defaultBlockedCount": 0
+  }
+  
