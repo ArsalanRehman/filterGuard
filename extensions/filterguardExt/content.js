@@ -1,4 +1,4 @@
-let offensiveWords = ["NSFW", "nsfw", ]; // Static default list
+let offensiveWords = ["NSFW", "nsfw", 'Rock' ]; // Static default list
 
 // Function to replace offensive words with asterisks
 function censorWords(node) {
@@ -24,35 +24,57 @@ function isCensored(content) {
 // Function to send log data to the backend
 async function sendLog(status) {
   const logData = {
-    url: window.location.href, // Current page URL
-    censorStatus: status,      // Whether the page was censored or not
+    url: window.location.href,
+    censorStatus: status,
   };
 
   chrome.runtime.sendMessage({ type: 'getAuthToken' }, async (response) => {
     if (response.token) {
       try {
-        const res = await fetch('http://127.0.0.1:5050/api/v1/log/createLog', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${response.token}`, // Include the token in the request header
-          },
-          body: JSON.stringify(logData),
-        });
-
-        if (!res.ok) {
-          alert(`Failed to send log: ${res.statusText}`);
-        } else {
-          alert(`Log sent successfully: ${JSON.stringify(logData)}`);
+        const tokenParts = response.token.split('.');
+        if (tokenParts.length !== 3) {
+          throw new Error('Invalid token format');
         }
+
+        const payload = JSON.parse(atob(tokenParts[1]));
+        const userId = payload.id;
+
+        if (!userId) {
+          throw new Error('User ID not found in token');
+        }
+
+        logData.userId = userId;
+
+        chrome.runtime.sendMessage(
+          {
+            type: 'proxyFetch',
+            url: 'http://127.0.0.1:5050/api/v1/log/createLog',
+            options: {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(logData),
+            },
+          },
+          (response) => {
+            if (response.success) {
+              // alert(`Log sent successfully: ${JSON.stringify(logData)}`);
+            } else {
+              // alert(`Error sending log: ${response.error}`);
+            }
+          }
+        );
       } catch (error) {
-        alert(`Error sending log: ${error.message}`);
+        // alert(`Error: ${error.message}`);
       }
     } else {
-      alert('No token found. Log could not be sent.');
+      // alert('No token found. Log could not be sent.');
     }
   });
 }
+
+
 
 // Function to dynamically fetch offensive words from the backend
 async function fetchWordlist() {
@@ -72,7 +94,7 @@ async function fetchWordlist() {
           ];
           alert(`Fetched offensive wordlist: ${offensiveWords}`);
         } else {
-          alert(`Failed to fetch wordlist: ${res.statusText}`);
+          // alert(`Failed to fetch wordlist: ${res.statusText}`);
         }
       } else {
         alert('No token found. Could not fetch wordlist.');
@@ -85,15 +107,16 @@ async function fetchWordlist() {
 
 // Main function to run the censoring and logging process
 async function main() {
-  await fetchWordlist(); // Fetch the dynamic wordlist from the backend
+  // await fetchWordlist(); // Fetch the dynamic wordlist from the backend
 
   censorWords(document.body); // Censor the content on the page
 
   const content = document.body.textContent || '';
+  alert(`Content: ${content}`);
   const status = isCensored(content) ? 'Censored' : 'Not Censored';
 
   await sendLog(status); // Log the censor status and page details
-  alert('NSFW words censored and log recorded!');
+  // alert('NSFW words censored and log recorded!');
 }
 
 // Observe dynamically loaded content

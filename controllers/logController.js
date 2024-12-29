@@ -1,4 +1,5 @@
 const LogModel = require('../models/logModel');
+const UserModel = require('../models/userModels');
 const Joi = require('joi');
 exports.getAllLogs = async (req, res) => {
     try {
@@ -21,6 +22,7 @@ exports.createLog = async (req, res) => {
     const logSchema = Joi.object({
         url: Joi.string().uri().required(),
         censorStatus: Joi.string().valid('Censored', 'Not Censored').required(),
+        userId: Joi.string().required(), // Accept userId in the request body
     });
 
     const { error } = logSchema.validate(req.body);
@@ -31,18 +33,20 @@ exports.createLog = async (req, res) => {
         });
     }
 
-    const { url, censorStatus } = req.body;
+    const { url, censorStatus, userId } = req.body;
 
     try {
-        // Ensure user info is available
-        if (!req.user || !req.user.name) {
-            return res.status(403).json({
+        // Retrieve user information from the database using the userId
+        const user = await UserModel.findById(userId);
+        
+        if (!user) {
+            return res.status(404).json({
                 status: 'fail',
-                message: 'Unauthorized: User information missing',
+                message: 'User not found',
             });
         }
 
-        const userName = req.user.name;
+        const username = user.name;     
         const timestamp = new Date().toISOString();
 
         // Create log entry
@@ -50,7 +54,7 @@ exports.createLog = async (req, res) => {
             url,
             censorStatus,
             timestamp,
-            userName,
+            username,
         });
 
         res.status(200).json({
@@ -67,6 +71,7 @@ exports.createLog = async (req, res) => {
         });
     }
 };
+
 exports.deleteLog = async (req, res) => {
     try {
         const log = await LogModel.findByIdAndDelete(req.params.id);
