@@ -20,7 +20,7 @@ router.get('/logout', authController.logout);
 router.route('/getAllUsers').get(
   // authController.protect,
   // authController.restrictTo('admin', 'superAdmin'),
-  userController.getUsers
+  userController.getParents
 );
 router.route('/forgetPassword').post(authController.forgetPassword);
 router.route('/resetPassword/:token').patch(authController.resetPassword);
@@ -33,17 +33,17 @@ router.route('/resetPassword/:token').patch(authController.resetPassword);
 
 router
   .route('/:id')
-  .get(authController.protect, userController.getUser)
+  .get(authController.protect, userController.getParent)
   // .post(authController.protect, userController.postUser)
   .patch(
     // authController.protect,
     // authController.restrictTo('superAdmin'),
-    userController.updateUser
+    userController.updateParent
   )
   .delete(
     // authController.protect,
     // authController.restrictTo('superAdmin', 'admin'),
-    userController.deleteUser
+    userController.deleteParent
   );
 //delete by id()
 module.exports = router;

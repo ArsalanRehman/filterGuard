@@ -1,10 +1,10 @@
-const User = require('./../models/userModels');
+const Parent = require('./../models/userModels');
 const authController = require('./../controllers/authController');
 
 //get already existed user
-exports.getUsers = async (req, res) => {
+exports.getParents = async (req, res) => {
   try {
-    const newUser = await User.find();
+    const newUser = await Parent.find();
 
     res.status(201).json({
       status: 'success',
@@ -23,7 +23,7 @@ exports.getUsers = async (req, res) => {
 };
 
 //find user by id
-exports.getUser = async (req, res) => {
+exports.getParent = async (req, res) => {
   try {
     const newUser = await User.findById(req.params.id);
     res.status(201).json({
@@ -42,7 +42,7 @@ exports.getUser = async (req, res) => {
   }
 };
 //update user
-exports.updateUser = async (req, res) => {
+exports.updateParent = async (req, res) => {
   try {
     const newUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -65,7 +65,7 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-exports.deleteUser = async (req, res) => {
+exports.deleteParent = async (req, res) => {
   try {
     dpt = null;
     dpt = await User.findByIdAndDelete(req.params.id);

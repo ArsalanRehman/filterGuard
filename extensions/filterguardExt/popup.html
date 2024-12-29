@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 50px; text-align: center; }
+    input { margin: 10px 0; width: 90%; padding: 10px; }
+    button { padding: 10px; width: 100%; background: #007BFF; color: #fff; border: none; cursor: pointer; }
+    button:disabled { background: #ccc; cursor: not-allowed; }
+    #message { margin-top: 15px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h3>Login</h3>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button type="submit" id="loginButton">Login</button>
+  </form>
+  <div id="message"></div>
+  <script src="popup.js"></script>
+</body>
+</html>

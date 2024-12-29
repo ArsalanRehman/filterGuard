@@ -39,9 +39,19 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.createUser = catchAsync(async (req, res, next) => {
+  // if (req.body.role === 'child') {
+  //   req.body.parentName = req.user.name;
+  // }
   const newUser = await User.create(req.body);
   createSendToken(newUser, 202, res);
 });
+
+exports.createChild = catchAsync(async (req, res, next) => {
+
+  const newUser = await User.create(req.body);
+  createSendToken(newUser, 202, res);
+});
+
 
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;

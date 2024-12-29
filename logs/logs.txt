@@ -1,0 +1,129 @@
+{
+  "method": "POST",
+  "url": "/api/v1/users/login",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {
+    "email": "arslan@gmail.com",
+    "password": "12345678"
+  },
+  "timestamp": "12/29/2024, 09:26:57"
+},
+{
+  "method": "POST",
+  "url": "/api/v1/users/login",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {
+    "email": "arslan@gmail.com",
+    "password": "12345678"
+  },
+  "timestamp": "12/29/2024, 09:36:43"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/log/getAllLogs",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 09:36:43"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/blacklist/getAllBlackList",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 09:36:57"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/blacklist/getAllBlackList",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 09:38:07"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/blacklist/getAllBlackList",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 09:39:56"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/log/getAllLogs",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 09:41:36"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/log/getAllLogs",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 10:42:55"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/log/getAllLogs",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 10:42:55"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/blacklist/getAllBlackList",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 10:42:58"
+},
+{
+  "method": "POST",
+  "url": "/api/v1/log/createLog",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {
+    "url": "http://localhost:3000/activityLog",
+    "censorStatus": "Not Censored"
+  },
+  "timestamp": "12/29/2024, 10:42:58"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/blacklist/getAllBlackList",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 10:43:10"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/blacklist/getAllBlackList",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 10:43:40"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/blacklist/getAllBlackList",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 10:44:09"
+},
+{
+  "method": "GET",
+  "url": "/api/v1/blacklist/getAllBlackList",
+  "ip": "127.0.0.1",
+  "username": "Anonymous",
+  "body": {},
+  "timestamp": "12/29/2024, 10:44:38"
+},

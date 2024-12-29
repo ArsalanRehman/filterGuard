@@ -1,14 +1,25 @@
 {
-    "manifest_version": 3,
-    "name": "NSFW Word Censor",
-    "version": "1.0",
-    "description": "Censors offensive or NSFW words from webpages.",
-    "permissions": ["activeTab", "scripting"],
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
-      }
-    ]
+  "manifest_version": 3,
+  "name": "FilterGuard",
+  "version": "1.0",
+  "description": "Local content filtering and parental control Chrome extension.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["<all_urls>"],  
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "content_scripts": [
+  {
+    "matches": ["<all_urls>"],
+    "js": ["content.js"]
   }
-  
+]
+
+}
